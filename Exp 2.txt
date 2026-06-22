@@ -1,0 +1,17 @@
+Ex-2: Write a simple lex specification to recognize different identifier
+
+%{
+#include <stdio.h>
+/* identifier */
+%}
+%%
+[ \t\n]+            ;   /* ignore whitespace */
+[a-zA-Z][a-zA-Z0-9]* { printf("%s: is an identifier\n", yytext); }
+[0-9][a-zA-Z0-9]*    { printf("%s: is not an identifier\n", yytext); }
+.                    { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}

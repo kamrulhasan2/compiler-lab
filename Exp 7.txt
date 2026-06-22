@@ -1,0 +1,23 @@
+Ex-7: Write a simple lex specification to recognize different punctuation symbol
+
+%{
+#include <stdio.h>
+/* punctuation */
+%}
+%%
+[ \t\n]+    ;   /* ignore whitespace */
+";" |
+"," |
+"%" |
+"-" |
+":" |
+"?" |
+"!"         { printf("%s: is a punctuation\n", yytext); }
+[a-zA-Z]+   { printf("%s: is not a punctuation\n", yytext); }
+.           { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}

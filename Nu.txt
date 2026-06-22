@@ -1,0 +1,234 @@
+Ex-1: Write a simple lex specification to recognize different keyword
+
+%{
+#include <stdio.h>
+/* keywords */
+%}
+%%
+[ \t\n]+    ;   /* ignore whitespace */
+if |
+else |
+void |
+float |
+double |
+int |
+char |
+while |
+for |
+do |
+switch |
+getch       { printf("%s: is a keyword\n", yytext); }
+[a-zA-Z]+   { printf("%s: is not a keyword\n", yytext); }
+.           { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}
+
+Ex-2: Write a simple lex specification to recognize different identifier
+
+%{
+#include <stdio.h>
+/* identifier */
+%}
+%%
+[ \t\n]+            ;   /* ignore whitespace */
+[a-zA-Z][a-zA-Z0-9]* { printf("%s: is an identifier\n", yytext); }
+[0-9][a-zA-Z0-9]*    { printf("%s: is not an identifier\n", yytext); }
+.                    { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}
+
+Ex-3: Write a simple lex specification to recognize real numbers
+
+%{
+#include <stdio.h>
+/* real or not a real number */
+%}
+%%
+[ \t\n]+    ;   /* ignore whitespace */
+-?((([0-9]+\.[0-9]*)|(\.[0-9]+))([eE][-+]?[0-9]+)?|([0-9]+[eE][-+]?[0-9]+)) { printf("%s: is a real number\n", yytext); }
+-?[0-9]+    { printf("%s: is not a real number\n", yytext); }
+[a-zA-Z]+   { printf("%s: is not a real number\n", yytext); }
+.           { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}
+
+Ex-4: Write a simple lex specification to recognize integer
+
+%{
+#include <stdio.h>
+/* integer or not an integer */
+%}
+%%
+[ \t\n]+    ;   /* ignore whitespace */
+[0-9]+      { printf("%s: is a positive integer\n", yytext); }
+-[0-9]+     { printf("%s: is a negative integer\n", yytext); }
+[a-zA-Z]+   { printf("%s: is not an integer\n", yytext); }
+.           { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}
+
+Ex-5: Write a simple lex specification to recognize float
+
+%{
+#include <stdio.h>
+/* float or not a float */
+%}
+%%
+[ \t\n]+            ;   /* ignore whitespace */
+[0-9]*\.[0-9]+      { printf("%s: is a positive float\n", yytext); }
+-[0-9]*\.[0-9]+     { printf("%s: is a negative float\n", yytext); }
+[0-9]+              { printf("%s: is not a float\n", yytext); }
+[a-zA-Z]+           { printf("%s: is not a float\n", yytext); }
+.                   { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}
+
+Ex-6: Write a simple lex specification to recognize positive and negative integer and float
+
+%{
+#include <stdio.h>
+/* float or integer */
+%}
+%%
+[ \t\n]+            ;   /* ignore whitespace */
+[0-9]*\.[0-9]+      { printf("%s: is a positive float\n", yytext); }
+-[0-9]*\.[0-9]+     { printf("%s: is a negative float\n", yytext); }
+[0-9]+              { printf("%s: is a positive integer\n", yytext); }
+-[0-9]+             { printf("%s: is a negative integer\n", yytext); }
+[a-zA-Z]+           { printf("%s: is not a number\n", yytext); }
+.                   { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}
+
+Ex-7: Write a simple lex specification to recognize different punctuation symbol
+
+%{
+#include <stdio.h>
+/* punctuation */
+%}
+%%
+[ \t\n]+    ;   /* ignore whitespace */
+";" |
+"," |
+"%" |
+"-" |
+":" |
+"?" |
+"!"         { printf("%s: is a punctuation\n", yytext); }
+[a-zA-Z]+   { printf("%s: is not a punctuation\n", yytext); }
+.           { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}
+
+Ex-8: Write a simple lex specification to recognize digit
+
+%{
+#include <stdio.h>
+/* digit */
+%}
+%%
+[ \t\n]+        ;   /* ignore whitespace */
+[0-9][0-9]+     { printf("%s: is not a digit\n", yytext); }
+[0-9]           { printf("%s: is a digit\n", yytext); }
+[a-zA-Z]+       { printf("%s: is not a digit\n", yytext); }
+.               { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}
+
+Ex-9: Write a simple lex specification to recognize different types of operator
+
+%{
+#include <stdio.h>
+/* operator */
+%}
+%%
+[ \t\n]+    ;   /* ignore whitespace */
+"+" |
+"%" |
+"-" |
+"*" |
+"/"         { printf("%s: is an arithmetic operator\n", yytext); }
+">=" |
+"<=" |
+"==" |
+">" |
+"<" |
+"="         { printf("%s: is a relational operator\n", yytext); }
+and |
+or |
+not         { printf("%s: is a logical operator\n", yytext); }
+[a-zA-Z]+   { printf("%s: is not an operator\n", yytext); }
+.           { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}
+
+Ex-10: Write a simple lex specification to recognize verbs
+
+%{
+#include <stdio.h>
+/* verbs */
+%}
+%%
+[ \t\n]+    ;   /* ignore whitespace */
+is |
+are |
+am |
+was |
+were |
+be |
+being |
+been |
+do |
+does |
+will |
+would |
+can |
+could |
+has |
+had |
+have |
+go          { printf("%s: is a verb\n", yytext); }
+[a-zA-Z]+   { printf("%s: is not a verb\n", yytext); }
+.           { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}

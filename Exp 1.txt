@@ -1,0 +1,28 @@
+Ex-1: Write a simple lex specification to recognize different keyword
+
+%{
+#include <stdio.h>
+/* keywords */
+%}
+%%
+[ \t\n]+    ;   /* ignore whitespace */
+if |
+else |
+void |
+float |
+double |
+int |
+char |
+while |
+for |
+do |
+switch |
+getch       { printf("%s: is a keyword\n", yytext); }
+[a-zA-Z]+   { printf("%s: is not a keyword\n", yytext); }
+.           { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}

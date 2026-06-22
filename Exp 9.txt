@@ -1,0 +1,30 @@
+Ex-9: Write a simple lex specification to recognize different types of operator
+
+%{
+#include <stdio.h>
+/* operator */
+%}
+%%
+[ \t\n]+    ;   /* ignore whitespace */
+"+" |
+"%" |
+"-" |
+"*" |
+"/"         { printf("%s: is an arithmetic operator\n", yytext); }
+">=" |
+"<=" |
+"==" |
+">" |
+"<" |
+"="         { printf("%s: is a relational operator\n", yytext); }
+and |
+or |
+not         { printf("%s: is a logical operator\n", yytext); }
+[a-zA-Z]+   { printf("%s: is not an operator\n", yytext); }
+.           { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}

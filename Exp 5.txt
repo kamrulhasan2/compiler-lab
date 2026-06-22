@@ -1,0 +1,19 @@
+Ex-5: Write a simple lex specification to recognize float
+
+%{
+#include <stdio.h>
+/* float or not a float */
+%}
+%%
+[ \t\n]+            ;   /* ignore whitespace */
+[0-9]*\.[0-9]+      { printf("%s: is a positive float\n", yytext); }
+-[0-9]*\.[0-9]+     { printf("%s: is a negative float\n", yytext); }
+[0-9]+              { printf("%s: is not a float\n", yytext); }
+[a-zA-Z]+           { printf("%s: is not a float\n", yytext); }
+.                   { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}

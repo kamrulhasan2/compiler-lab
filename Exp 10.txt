@@ -1,0 +1,34 @@
+Ex-10: Write a simple lex specification to recognize verbs
+
+%{
+#include <stdio.h>
+/* verbs */
+%}
+%%
+[ \t\n]+    ;   /* ignore whitespace */
+is |
+are |
+am |
+was |
+were |
+be |
+being |
+been |
+do |
+does |
+will |
+would |
+can |
+could |
+has |
+had |
+have |
+go          { printf("%s: is a verb\n", yytext); }
+[a-zA-Z]+   { printf("%s: is not a verb\n", yytext); }
+.           { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}

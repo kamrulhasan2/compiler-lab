@@ -1,0 +1,18 @@
+Ex-4: Write a simple lex specification to recognize integer
+
+%{
+#include <stdio.h>
+/* integer or not an integer */
+%}
+%%
+[ \t\n]+    ;   /* ignore whitespace */
+[0-9]+      { printf("%s: is a positive integer\n", yytext); }
+-[0-9]+     { printf("%s: is a negative integer\n", yytext); }
+[a-zA-Z]+   { printf("%s: is not an integer\n", yytext); }
+.           { ECHO; }
+%%
+int main()
+{
+    yylex();
+    return 0;
+}
